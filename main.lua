@@ -60,7 +60,7 @@ function love.load ()
 	backgroundSpace.twinPlanet.width = backgroundSpace.twinPlanet.img:getWidth()
 
 -- recupere --paramètres-- de bigPlanet
-	backgroundSpace.bigPlanet.y = desktopWidth/2
+	backgroundSpace.bigPlanet.x = desktopWidth/2
 	backgroundSpace.bigPlanet.y = desktopHeight/2
 	backgroundSpace.bigPlanet.height = backgroundSpace.bigPlanet.img:getHeight()
 	backgroundSpace.bigPlanet.width = backgroundSpace.bigPlanet.img:getWidth()
@@ -74,16 +74,23 @@ function love.load ()
 -- convertit image -> fullscreen
 	backgroundSpace.scaleX = desktopWidth / backgroundSpace.background.width
 	backgroundSpace.scaleY = desktopWidth / backgroundSpace.background.height
-
-print(backgroundSpace.bigPlanet.x)
-print(backgroundSpace.bigPlanet.y)
+	-- scale bigPlanet
+		backgroundSpace.bigPlanet.scaleX = (desktopWidth / backgroundSpace.background.width)
+		backgroundSpace.bigPlanet.scaleY = (desktopWidth / backgroundSpace.background.height)/1.5
 
 end
 
 function love.update (dt)
 
+--animation 
+	--particule
+	backgroundSpace.particule.x = backgroundSpace.particule.x + 50 * dt
+	backgroundSpace.particule.y = backgroundSpace.particule.y + 50 * dt
 
-
+	if love.keyboard.isDown("r") then
+	 	 backgroundSpace.particule.x = desktopWidth/2
+	  	backgroundSpace.particule.y = desktopHeight/2
+	end
 end
 
 function love.draw ()
@@ -91,13 +98,15 @@ function love.draw ()
 --Background inGame
 
   love.graphics.draw(backgroundSpace.background.img, backgroundSpace.background.x,backgroundSpace.background.y,0,backgroundSpace.scaleX,backgroundSpace.scaleY,backgroundSpace.background.width/2,backgroundSpace.background.height)
-  --particule
-  love.graphics.draw(backgroundSpace.particule.img ,backgroundSpace.particule.x,backgroundSpace.particule.y,0,backgroundSpace.scaleX /4,backgroundSpace.scaleY/4,backgroundSpace.particule.width/2,backgroundSpace.particule.height)
+
   --twinPlanet
   love.graphics.draw(backgroundSpace.twinPlanet.img , backgroundSpace.twinPlanet.x, backgroundSpace.twinPlanet.y,0,backgroundSpace.scaleX,backgroundSpace.scaleY/2, backgroundSpace.twinPlanet.width/2, backgroundSpace.twinPlanet.height/2)
   --saturne
   love.graphics.draw(backgroundSpace.saturne.img, backgroundSpace.saturne.x, backgroundSpace.twinPlanet.y,0, backgroundSpace.scaleX/2, backgroundSpace.scaleY/3, backgroundSpace.saturne.width/2, backgroundSpace.saturne.height/2)
   --bigPlanet
-  love.graphics.draw(backgroundSpace.bigPlanet.img, backgroundSpace.bigPlanet.x, backgroundSpace.bigPlanet.y,0, backgroundSpace.scaleX, backgroundSpace.scaleY, backgroundSpace.bigPlanet.width, backgroundSpace.bigPlanet.height)
+  love.graphics.draw(backgroundSpace.bigPlanet.img, backgroundSpace.bigPlanet.x, backgroundSpace.bigPlanet.y,0, backgroundSpace.bigPlanet.scaleX, backgroundSpace.bigPlanet.scaleY, backgroundSpace.bigPlanet.width, backgroundSpace.bigPlanet.height)
+
+ --particule
+  love.graphics.draw(backgroundSpace.particule.img ,backgroundSpace.particule.x,backgroundSpace.particule.y,0,backgroundSpace.scaleX/3,backgroundSpace.scaleY/3,backgroundSpace.particule.width/2,backgroundSpace.particule.height/2)
 
 end	
