@@ -13,12 +13,34 @@ function love.load ()
   love.window.setFullscreen(true)
   
   backgroundSpace = {}
-  
-  backgroundSpace.particule = {} 
+  --load table background
 
+  --particule
+  backgroundSpace.particule = {}
+  backgroundSpace.particule.x = {}
+  backgroundSpace.particule.y = {}
+
+  --saturne
+  backgroundSpace.saturne = {}
+  backgroundSpace.saturne.x = {}
+  backgroundSpace.saturne.y = {}
+
+  --twinPlanet
+  backgroundSpace.twinPlanet = {}
+  backgroundSpace.twinPlanet.x = {}
+  backgroundSpace.twinPlanet.y = {}
+
+  --bigPlanet
+  backgroundSpace.bigPlanet = {}
+  backgroundSpace.bigPlanet.x = {}
+  backgroundSpace.bigPlanet.y = {}
 --load background
   backgroundSpace.img = love.graphics.newImage("images/background/parallax-space-backgound.png")
   backgroundSpace.particule = love.graphics.newImage("images/background/parallax-space-stars.png")
+  backgroundSpace.saturne = love.graphics.newImage("images/background/parallax-space-ring-planet.png")
+  backgroundSpace.twinPlanet = love.graphics.newImage("images/background/parallax-space-far-planets.png")
+  backgroundSpace.bigPlanet = love.graphics.newImage("images/background/parallax-space-big-planet.png")
+
 -- récupère height/width fullscreen
   deskopWidth, deskopHeight = love.window.getDesktopDimensions( display )
 -- récupère height/width de parallax-space-backgound.png
@@ -30,10 +52,25 @@ backgroundSpace.scaleX = deskopWidth / backgroundSpace.width
 backgroundSpace.scaleY = deskopWidth / backgroundSpace.height
 
 -- load x et y de backgroundSpace.particule
-  backgroundSpace.particule.x = deskopWidth/2
-  backgroundSpace.particule.y = deskopHeight/2
+  backgroundSpace.particule.x = 0
+  backgroundSpace.particule.y = 0
 
-end 
+-- load x et y de saturne
+
+	--backgroundSpace.saturne.x =
+	--backgroundSpace.saturne.y =
+
+-- load --paramètres-- de twinPlanet
+
+	backgroundSpace.twinPlanet.x = deskopWidth/2
+	backgroundSpace.twinPlanet.y = deskopHeight/2
+
+-- load x et y de bigPlanet
+
+	--backgroundSpace.bigPlanet.y =
+	--backgroundSpace.bigPlanet.y =
+
+end
 
 function love.update (dt)
 
@@ -47,4 +84,6 @@ function love.draw ()
   love.graphics.draw(backgroundSpace.img, deskopWidth/2,deskopHeight,0,backgroundSpace.scaleX,backgroundSpace.scaleY,backgroundSpace.width/2,backgroundSpace.height)
   --particule
   love.graphics.draw(backgroundSpace.particule,backgroundSpace.particule.x,backgroundSpace.particule.y,0,backgroundSpace.scaleX / 2,backgroundSpace.scaleY/2,backgroundSpace.width/2,backgroundSpace.height)
-end
+  --twinPlanet
+  love.graphics.draw(backgroundSpace.twinPlanet, backgroundSpace.twinPlanet.x, backgroundSpace.twinPlanet.y,0,backgroundSpace.scaleX / 2,backgroundSpace.scaleY/2)
+end	
