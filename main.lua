@@ -41,38 +41,42 @@ function love.load ()
   backgroundSpace.twinPlanet.img  = love.graphics.newImage("images/background/parallax-space-far-planets.png")
   backgroundSpace.bigPlanet.img  = love.graphics.newImage("images/background/parallax-space-big-planet.png")
 
--- récupere --paramètres-- de backgroundSpace.particule
+-- récupere --paramètres-- de particule
  	 backgroundSpace.particule.x = desktopWidth/2
   	backgroundSpace.particule.y = desktopHeight/2
 	backgroundSpace.particule.height = backgroundSpace.particule.img:getHeight()
 	backgroundSpace.particule.width = backgroundSpace.particule.img:getWidth()
 
 -- recupere --paramètres-- de saturne
-
 	backgroundSpace.saturne.x = desktopWidth/2
 	backgroundSpace.saturne.y = desktopHeight/2
 	backgroundSpace.saturne.height = backgroundSpace.saturne.img:getHeight()
 	backgroundSpace.saturne.width = backgroundSpace.saturne.img:getWidth()
 
 -- recupere --paramètres-- de twinPlanet
-
 	backgroundSpace.twinPlanet.x = desktopWidth/2
 	backgroundSpace.twinPlanet.y = desktopHeight/2
 	backgroundSpace.twinPlanet.height = backgroundSpace.twinPlanet.img:getHeight()
 	backgroundSpace.twinPlanet.width = backgroundSpace.twinPlanet.img:getWidth()
 
 -- recupere --paramètres-- de bigPlanet
+	backgroundSpace.bigPlanet.y = desktopWidth/2
+	backgroundSpace.bigPlanet.y = desktopHeight/2
+	backgroundSpace.bigPlanet.height = backgroundSpace.bigPlanet.img:getHeight()
+	backgroundSpace.bigPlanet.width = backgroundSpace.bigPlanet.img:getWidth()
 
-	--backgroundSpace.bigPlanet.y =
-	--backgroundSpace.bigPlanet.y =
-
--- récupère --paramètres-- de parallax-space-backgound
+-- récupère --paramètres-- de background
 	backgroundSpace.background.height = backgroundSpace.background.img:getHeight()
 	backgroundSpace.background.width = backgroundSpace.background.img:getWidth()
+	backgroundSpace.background.x = desktopWidth/2
+	backgroundSpace.background.y = desktopHeight
 
 -- convertit image -> fullscreen
 	backgroundSpace.scaleX = desktopWidth / backgroundSpace.background.width
 	backgroundSpace.scaleY = desktopWidth / backgroundSpace.background.height
+
+print(backgroundSpace.bigPlanet.x)
+print(backgroundSpace.bigPlanet.y)
 
 end
 
@@ -86,12 +90,14 @@ function love.draw ()
 
 --Background inGame
 
-  love.graphics.draw(backgroundSpace.background.img, desktopWidth/2,desktopHeight,0,backgroundSpace.scaleX,backgroundSpace.scaleY,backgroundSpace.background.width/2,backgroundSpace.background.height)
+  love.graphics.draw(backgroundSpace.background.img, backgroundSpace.background.x,backgroundSpace.background.y,0,backgroundSpace.scaleX,backgroundSpace.scaleY,backgroundSpace.background.width/2,backgroundSpace.background.height)
   --particule
   love.graphics.draw(backgroundSpace.particule.img ,backgroundSpace.particule.x,backgroundSpace.particule.y,0,backgroundSpace.scaleX /4,backgroundSpace.scaleY/4,backgroundSpace.particule.width/2,backgroundSpace.particule.height)
   --twinPlanet
   love.graphics.draw(backgroundSpace.twinPlanet.img , backgroundSpace.twinPlanet.x, backgroundSpace.twinPlanet.y,0,backgroundSpace.scaleX,backgroundSpace.scaleY/2, backgroundSpace.twinPlanet.width/2, backgroundSpace.twinPlanet.height/2)
   --saturne
   love.graphics.draw(backgroundSpace.saturne.img, backgroundSpace.saturne.x, backgroundSpace.twinPlanet.y,0, backgroundSpace.scaleX/2, backgroundSpace.scaleY/3, backgroundSpace.saturne.width/2, backgroundSpace.saturne.height/2)
+  --bigPlanet
+  love.graphics.draw(backgroundSpace.bigPlanet.img, backgroundSpace.bigPlanet.x, backgroundSpace.bigPlanet.y,0, backgroundSpace.scaleX, backgroundSpace.scaleY, backgroundSpace.bigPlanet.width, backgroundSpace.bigPlanet.height)
 
 end	
