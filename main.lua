@@ -92,6 +92,6 @@ function love.draw ()
   --twinPlanet
   love.graphics.draw(backgroundSpace.twinPlanet.img , backgroundSpace.twinPlanet.x, backgroundSpace.twinPlanet.y,0,backgroundSpace.scaleX,backgroundSpace.scaleY/2, backgroundSpace.twinPlanet.width/2, backgroundSpace.twinPlanet.height/2)
   --saturne
-  love.graphics.draw(backgroundSpace.saturne.img, backgroundSpace.saturne.x, backgroundSpace.twinPlanet.y,0, backgroundSpace.scaleX/3, backgroundSpace.scaleY/3, backgroundSpace.saturne.width/2, backgroundSpace.saturne.height/2)
+  love.graphics.draw(backgroundSpace.saturne.img, backgroundSpace.saturne.x, backgroundSpace.twinPlanet.y,0, backgroundSpace.scaleX/2, backgroundSpace.scaleY/3, backgroundSpace.saturne.width/2, backgroundSpace.saturne.height/2)
 
 end	
