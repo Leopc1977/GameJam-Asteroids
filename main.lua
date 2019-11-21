@@ -80,12 +80,26 @@ function love.load ()
 	backgroundSpace.bigPlanet.multiplicateY = 5.5
 	backgroundSpace.bigPlanet.scaleX = (desktopWidth / backgroundSpace.background.width)/backgroundSpace.bigPlanet.multiplicateX
 	backgroundSpace.bigPlanet.scaleY = (desktopWidth / backgroundSpace.background.height)/backgroundSpace.bigPlanet.multiplicateY
-
+	-- scale particule
+	backgroundSpace.particule.scaleX = desktopWidth / backgroundSpace.background.width
+	backgroundSpace.particule.scaleY = desktopWidth / backgroundSpace.background.height
 --timer
 timer = 0
 tempLimit = 1
 chrono = 0
 end
+
+-- round -> nb d'ennemie
+wave = {}
+wave[1] = 1
+wave[2] = 2
+wave[3] = 3
+wave[4] = 4
+wave[5] = 5
+
+
+--test 
+condStop = false
 
 function love.update (dt)
 
@@ -99,21 +113,32 @@ function love.update (dt)
 
 --animation 
 	--particule
-	backgroundSpace.particule.x = backgroundSpace.particule.x + 50 * dt
-	backgroundSpace.particule.y = backgroundSpace.particule.y + 50 * dt
+	--backgroundSpace.particule.x = backgroundSpace.particule.x + 50 * dt
+	--backgroundSpace.particule.y = backgroundSpace.particule.y + 50 * dt
 
-	--if love.keyboard.isDown("r") then
-	--    backgroundSpace.particule.x = desktopWidth/2 
-	--  	backgroundSpace.particule.y = desktopHeight/2
-	--end
+	if love.keyboard.isDown("r") then
+	    backgroundSpace.particule.x = desktopWidth/2 
+	  	backgroundSpace.particule.y = desktopHeight/2
+	end
 
 	--bigPlanet
-	if chrono == 0 then
-	 --if love.keyboard.isDown("a") then
-	 	backgroundSpace.particule.rotation = backgroundSpace.particule.rotation + 1
-		backgroundSpace.bigPlanet.scaleX = backgroundSpace.bigPlanet.scaleX + 0.01
-		backgroundSpace.bigPlanet.scaleY = backgroundSpace.bigPlanet.scaleY + 0.01
+	if love.keyboard.isDown("s") then
+		condStop = true
 	end
+
+	if condStop == false then
+		if chrono == 0 then
+		 --if love.keyboard.isDown("a") then
+		 	backgroundSpace.particule.rotation = backgroundSpace.particule.rotation + 0.01
+		 	--bigPlanet scale
+			backgroundSpace.bigPlanet.scaleX = backgroundSpace.bigPlanet.scaleX + 0.01
+			backgroundSpace.bigPlanet.scaleY = backgroundSpace.bigPlanet.scaleY + 0.01
+			--particule scale
+			backgroundSpace.particule.scaleX = backgroundSpace.particule.scaleX + 0.01
+			backgroundSpace.particule.scaleY = backgroundSpace.particule.scaleY + 0.01
+		end
+	end
+
 	if love.keyboard.isDown("a") then
 		backgroundSpace.bigPlanet.scaleX = (desktopWidth / backgroundSpace.background.width)/backgroundSpace.bigPlanet.multiplicateX
 		backgroundSpace.bigPlanet.scaleY = (desktopWidth / backgroundSpace.background.height)/backgroundSpace.bigPlanet.multiplicateY
@@ -132,9 +157,13 @@ function love.draw ()
   love.graphics.draw(backgroundSpace.saturne.img, backgroundSpace.saturne.x, backgroundSpace.twinPlanet.y,0, backgroundSpace.scaleX/2, backgroundSpace.scaleY/3, backgroundSpace.saturne.width/2, backgroundSpace.saturne.height/2)
 
   --particule
-  love.graphics.draw(backgroundSpace.particule.img ,backgroundSpace.particule.x,backgroundSpace.particule.y,0,backgroundSpace.scaleX/3,backgroundSpace.scaleY/3,backgroundSpace.particule.width/2,backgroundSpace.particule.height/2)
+  love.graphics.draw(backgroundSpace.particule.img ,backgroundSpace.particule.x,backgroundSpace.particule.y,backgroundSpace.particule.rotation,backgroundSpace.particule.scaleX/3,backgroundSpace.particule.scaleY/3,backgroundSpace.particule.width/2,backgroundSpace.particule.height/2)
 
   --bigPlanet
   love.graphics.draw(backgroundSpace.bigPlanet.img, backgroundSpace.bigPlanet.x, backgroundSpace.bigPlanet.y,0, backgroundSpace.bigPlanet.scaleX, backgroundSpace.bigPlanet.scaleY, backgroundSpace.bigPlanet.width/2, backgroundSpace.bigPlanet.height/2)
+
+x, y = love.mouse.getPosition()
+love.graphics.print(x, 10, 10)
+love.graphics.print(y, 10, 20)
 
 end	
