@@ -69,22 +69,6 @@ function love.update()
 
 	-- position x et y de mouse
   	xM, yM = love.mouse.getPosition()
-	
-		function love.mousepressed (x, y, button)
-
-	  	xM, yM = love.mouse.getPosition()
-
-	  	-- progress
-		if xM > option.bar.x and xM < option.bar.x + progress.bar.width and yM > option.bar[1].y and yM < progress.bar[1].y + progress.bar.height and button == 1 then
-			love.graphics.print("bar 1")
-		end
-
-		if xM > option.bar.x and xM < option.bar.x + progress.bar.width and yM > option.bar[2].y and yM < progress.bar[2].y + progress.bar.height and button == 1 then
-			print("bar 2")
-		end
-
-	end
-
 
 end
 
@@ -105,5 +89,20 @@ function love.draw()
 
 	love.graphics.rectangle("fill", progress.bar.x, progress.bar[1].y, progress.bar.width, progress.bar.height)
 	love.graphics.rectangle("fill", progress.bar.x, progress.bar[2].y, progress.bar.width, progress.bar.height)
+
+end
+
+function love.mousepressed (x, y, button)
+
+ 	xM, yM = love.mouse.getPosition()
+
+ 	-- progress
+	if xM > option.bar.x and xM < option.bar.x + progress.bar.width and yM > option.bar[1].y and yM < progress.bar[1].y + progress.bar.height and button == 1 then
+		print("bar 1")
+	end
+
+	if xM > option.bar.x and xM < option.bar.x + progress.bar.width and yM > option.bar[2].y and yM < progress.bar[2].y + progress.bar.height and button == 1 then
+		print("bar 2")
+	end
 
 end
