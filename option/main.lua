@@ -54,6 +54,12 @@ function love.load()
 	--height/width
 	progress.bar.height = 10*desktopHeight/100 - 10
 	progress.bar.width = 60*desktopWidth/100 - 10
+
+	--width qui varie pour le volume
+	progress.width = {}
+	progress.width[1] =  60*desktopWidth/100 - 10
+	progress.width[2] = 60*desktopWidth/100 - 10
+
 	-- x et y bar
 	progress.bar.x = option.bar.x + 5
 
@@ -63,12 +69,29 @@ function love.load()
 	progress.bar[2] = {}
 	progress.bar[2].y = option.bar[2].y + 5
 
+	--calcule distance entre coté gauche de l'ecran et le coté gauche de la bar
+	local xa = 0
+	local ya = progress.bar[1].y
+	local xb = option.bar.x
+	local yb = progress.bar[1].y
+	progress.normeZ = math.sqrt ( (xb - xa)^2 + (yb - ya)^2 )
+
+	--calcule la norme de la largeur bar progress
+	local xB = progress.bar.x + progress.bar.width
+	local yB = progress.bar[1].y + progress.bar.height
+	progress.norme = math.sqrt( (xB - progress.bar.x)^2 + (yB - progress.bar[1].y)^2 )
+
 end
 
 function love.update()
 
 	-- position x et y de mouse
   	xM, yM = love.mouse.getPosition()
+
+	--calcule la norme du debut de la largeur jusqu'à la souris
+	local x1 =  xM
+	local y1 = 0
+	progress.normeM = math.sqrt( (xM - x1)^2 + (yM - x1)^2 ) - progress.normeZ
 
 end
 
@@ -87,21 +110,21 @@ function love.draw()
 	--progression bar
 	love.graphics.setColor(200,100,0)
 
-	love.graphics.rectangle("fill", progress.bar.x, progress.bar[1].y, progress.bar.width, progress.bar.height)
-	love.graphics.rectangle("fill", progress.bar.x, progress.bar[2].y, progress.bar.width, progress.bar.height)
+	love.graphics.rectangle("fill", progress.bar.x, progress.bar[1].y, progress.width[1], progress.bar.height)
+	love.graphics.rectangle("fill", progress.bar.x, progress.bar[2].y, progress.width[2], progress.bar.height)
 
 end
 
-function love.mousepressed (x, y, button)
-
- 	xM, yM = love.mouse.getPosition()
+function love.mousepressed (xM, yM, button)
 
  	-- progress
-	if xM > option.bar.x and xM < option.bar.x + progress.bar.width and yM > option.bar[1].y and yM < progress.bar[1].y + progress.bar.height and button == 1 then
-		print("bar 1")
+	if xM > progress.bar.x and xM < progress.bar.x + progress.bar.width and yM > progress.bar[1].y and yM < progress.bar[1].y + progress.bar.height and button == 1 then
+		local pourc = 100*progress.normeM/progress.norme
+		print(pourc)
+		progress.width[1] = (60*desktopWidth/100) * pourc
 	end
 
-	if xM > option.bar.x and xM < option.bar.x + progress.bar.width and yM > option.bar[2].y and yM < progress.bar[2].y + progress.bar.height and button == 1 then
+	if xM > progress.bar.x and xM < progress.bar.x + progress.bar.width and yM > option.bar[2].y and yM < progress.bar[2].y + progress.bar.height and button == 1 then
 		print("bar 2")
 	end
 
