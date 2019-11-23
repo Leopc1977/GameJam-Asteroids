@@ -56,26 +56,26 @@ function love.draw()
 
 	function love.mousepressed (xM, yM, button)
 
-	if xM > x[1] and xM < x[1] + width and yM > y[1] and yM < y[1] + height and button == 1 then
-		love.graphics.print("good 1 !", 1,30)
-		print("1")
-	end
+		if xM > x[1] and xM < x[1] + width and yM > y[1] and yM < y[1] + height and button == 1 then
+			love.graphics.print("good 1 !", 1,30)
+			print("1")
+		end
 
-	if xM > x[1] and xM < x[1] + width and yM > y[2] and yM < y[2] + height and button == 1 then
-		love.graphics.print("good 2 !", 1,40)
-		print("2")
-	end
+		if xM > x[1] and xM < x[1] + width and yM > y[2] and yM < y[2] + height and button == 1 then
+			love.graphics.print("good 2 !", 1,40)
+			print("2")
+		end
 
-	if xM > x[1] and xM < x[1] + width and yM > y[3] and yM < y[3] + height and button == 1 then
-		love.graphics.print("good 3 !", 1,50)
-		print("3")
-	end
+		if xM > x[1] and xM < x[1] + width and yM > y[3] and yM < y[3] + height and button == 1 then
+			love.graphics.print("good 3 !", 1,50)
+			print("3")
+		end
 
-	if xM > x[1] and xM < x[1] + width and yM > y[4] and yM < y[4] + height and button == 1 then
-		love.graphics.print("good 4 !", 1,60)
-		print("4")
+		if xM > x[1] and xM < x[1] + width and yM > y[4] and yM < y[4] + height and button == 1 then
+			love.graphics.print("good 4 !", 1,60)
+			print("4")
+		end
 	end
-end
   	--rectangle
   	love.graphics.rectangle("fill",x[1],y[1], width, height)
 	love.graphics.rectangle("fill",x[1],y[2], width, height)
