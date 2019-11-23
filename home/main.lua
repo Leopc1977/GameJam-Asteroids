@@ -1,6 +1,6 @@
 -- Cette ligne permet d'afficher des traces dans la console pendant l'éxécution
 io.stdout:setvbuf('no')
-
+ 
 function love.load()
 
 	love.window.setFullscreen(true)
