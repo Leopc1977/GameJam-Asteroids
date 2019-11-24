@@ -69,14 +69,14 @@ function love.load()
 	progress.bar[2] = {}
 	progress.bar[2].y = option.bar[2].y + 5
 
-	--calcule distance entre coté gauche de l'ecran et le coté gauche de la bar
-	local xa = 0
+	--calcule distance entre coté gauche de l'ecran et le coté gauche de la bar 2 point
+	--[[local xa = 0
 	local ya = progress.bar[1].y
 	local xb = option.bar.x
 	local yb = progress.bar[1].y
-	progress.normeZ = math.sqrt ( (xb - xa)^2 + (yb - ya)^2 )
+	progress.normeZ = math.sqrt ( (xb - xa)^2 + (yb - ya)^2 )]]--
 
-	--calcule la norme de la largeur bar progress
+	--calcule la norme de la largeur bar progress 2 point 
 	local xB = progress.bar.x + progress.bar.width
 	local yB = progress.bar[1].y + progress.bar.height
 	progress.norme = math.sqrt( (xB - progress.bar.x)^2 + (yB - progress.bar[1].y)^2 )
@@ -91,7 +91,7 @@ function love.update()
 	--calcule la norme du debut de la largeur jusqu'à la souris
 	local x1 =  xM
 	local y1 = 0
-	progress.normeM = math.sqrt( (xM - x1)^2 + (yM - x1)^2 ) - progress.normeZ
+	progress.normeM = math.sqrt( (xM - x1)^2 + (yM - x1)^2 ) 
 
 end
 
