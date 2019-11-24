@@ -46,7 +46,7 @@ function love.load ()
   	backgroundSpace.particule.y = desktopHeight/2 --backgroundSpace.bigPlanet.y
 	backgroundSpace.particule.height = backgroundSpace.particule.img:getHeight()
 	backgroundSpace.particule.width = backgroundSpace.particule.img:getWidth()
-	backgroundSpace.particule.rotation = 0
+	backgroundSpace.rotation = 0
 
 -- recupere --paramètres-- de saturne
 	backgroundSpace.saturne.x = desktopWidth/2
@@ -80,9 +80,13 @@ function love.load ()
 	backgroundSpace.bigPlanet.multiplicateY = 5.5
 	backgroundSpace.bigPlanet.scaleX = (desktopWidth / backgroundSpace.background.width)/backgroundSpace.bigPlanet.multiplicateX
 	backgroundSpace.bigPlanet.scaleY = (desktopWidth / backgroundSpace.background.height)/backgroundSpace.bigPlanet.multiplicateY
+	backgroundSpace.bigPlanet.scaleXLimit = 8.3547058823528
+	backgroundSpace.bigPlanet.scaleYLimit = 8.771818181818
 	-- scale particule
 	backgroundSpace.particule.scaleX = desktopWidth / backgroundSpace.background.width
 	backgroundSpace.particule.scaleY = desktopWidth / backgroundSpace.background.height
+	backgroundSpace.particule.scaleXLimit = 13.648823529412
+	backgroundSpace.particule.scaleYLimit = 18.59
 --timer
 timer = 0
 tempLimit = 1
@@ -96,7 +100,6 @@ wave[2] = 2
 wave[3] = 3
 wave[4] = 4
 wave[5] = 5
-
 
 --test 
 condStop = false
@@ -112,30 +115,17 @@ function love.update (dt)
   end
 
 --animation 
-	--particule
-	--backgroundSpace.particule.x = backgroundSpace.particule.x + 50 * dt
-	--backgroundSpace.particule.y = backgroundSpace.particule.y + 50 * dt
 
-	if love.keyboard.isDown("r") then
-	    backgroundSpace.particule.x = desktopWidth/2 
-	  	backgroundSpace.particule.y = desktopHeight/2
-	end
-
-	--bigPlanet
-	if love.keyboard.isDown("s") then
-		condStop = true
-	end
-
-	if condStop == false then
+	--rotation des particule
+	backgroundSpace.rotation = backgroundSpace.rotation + 0.005
+	if backgroundSpace.bigPlanet.scaleX < backgroundSpace.bigPlanet.scaleXLimit and backgroundSpace.bigPlanet.scaleY < backgroundSpace.bigPlanet.scaleYLimit and backgroundSpace.particule.scaleX < backgroundSpace.particule.scaleXLimit and backgroundSpace.particule.scaleY < backgroundSpace.particule.scaleYLimit then
 		if chrono == 0 then
-		 --if love.keyboard.isDown("a") then
-		 	backgroundSpace.particule.rotation = backgroundSpace.particule.rotation + 0.01
 		 	--bigPlanet scale
-			backgroundSpace.bigPlanet.scaleX = backgroundSpace.bigPlanet.scaleX + 0.01
-			backgroundSpace.bigPlanet.scaleY = backgroundSpace.bigPlanet.scaleY + 0.01
+			backgroundSpace.bigPlanet.scaleX = backgroundSpace.bigPlanet.scaleX + 0.001
+			backgroundSpace.bigPlanet.scaleY = backgroundSpace.bigPlanet.scaleY + 0.001
 			--particule scale
-			backgroundSpace.particule.scaleX = backgroundSpace.particule.scaleX + 0.01
-			backgroundSpace.particule.scaleY = backgroundSpace.particule.scaleY + 0.01
+			backgroundSpace.particule.scaleX = backgroundSpace.particule.scaleX + 0.001
+			backgroundSpace.particule.scaleY = backgroundSpace.particule.scaleY + 0.001
 		end
 	end
 	-- test reset scale bigPlanet
@@ -153,13 +143,11 @@ function love.draw ()
 
   --twinPlanet
   love.graphics.draw(backgroundSpace.twinPlanet.img , backgroundSpace.twinPlanet.x, backgroundSpace.twinPlanet.y,0,backgroundSpace.scaleX,backgroundSpace.scaleY/2, backgroundSpace.twinPlanet.width/2, backgroundSpace.twinPlanet.height/2)
-  --saturne
-  --love.graphics.draw(backgroundSpace.saturne.img, backgroundSpace.saturne.x, backgroundSpace.twinPlanet.y,0, backgroundSpace.scaleX/2, backgroundSpace.scaleY/3, backgroundSpace.saturne.width/2, backgroundSpace.saturne.height/2)
 
   --particule
-  love.graphics.draw(backgroundSpace.particule.img ,backgroundSpace.particule.x,backgroundSpace.particule.y,backgroundSpace.particule.rotation,backgroundSpace.particule.scaleX/3,backgroundSpace.particule.scaleY/3,backgroundSpace.particule.width/2,backgroundSpace.particule.height/2)
+  love.graphics.draw(backgroundSpace.particule.img ,backgroundSpace.particule.x,backgroundSpace.particule.y,backgroundSpace.rotation,backgroundSpace.particule.scaleX/3,backgroundSpace.particule.scaleY/3,backgroundSpace.particule.width/2,backgroundSpace.particule.height/2)
 
   --bigPlanet
-  love.graphics.draw(backgroundSpace.bigPlanet.img, backgroundSpace.bigPlanet.x, backgroundSpace.bigPlanet.y,0, backgroundSpace.bigPlanet.scaleX, backgroundSpace.bigPlanet.scaleY, backgroundSpace.bigPlanet.width/2, backgroundSpace.bigPlanet.height/2)
+  love.graphics.draw(backgroundSpace.bigPlanet.img, backgroundSpace.bigPlanet.x, backgroundSpace.bigPlanet.y,backgroundSpace.rotation, backgroundSpace.bigPlanet.scaleX, backgroundSpace.bigPlanet.scaleY, backgroundSpace.bigPlanet.width/2, backgroundSpace.bigPlanet.height/2)
 
 end	
